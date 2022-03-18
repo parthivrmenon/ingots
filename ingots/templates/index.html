@@ -1,18 +1,36 @@
-<h1> Ingots Library</h1>
-<h1>Upload new File</h1>
-<form method=post enctype=multipart/form-data>
-  <input type=file name=file>
-  <input type=submit value=Upload>
-  {% if message %}
-  {{ message }}
-  {% endif %}
-</form>
-<h1> Your Library</h1>
-<ol>
-    {% for file in files %}
-    <li>
+<head>
+  <title>Ingots</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+
+<body class="left flex-container">
+  <div class="check-in centered-text">
+    <h1 class="header"> Check-In</h1>
+    <div class="file-input">
+      <form method=post enctype=multipart/form-data>
+      <input type="file" name="file" id="file" class="file">
+      <label for="file">Select a file</label>
+      <input type=submit value=Upload class="button color_primary">
+      </form>
+      <div class="centered notification">
+        {% if message %}
+        {{ message }}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <div class="check-out centered">
+    <div>
+    <h1 class="header centered-text color_primary"> Check-Out</h1>
+    <ol>
+      {% for file in files %}
+      <li>
         <a href="/uploads/{{file}}">{{file}}</a>
-    </li>
-    {% endfor %}
-</ol>
+      </li>
+      {% endfor %}
+    </ol>
+  </div>
+</body>
+
 
