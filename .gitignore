@@ -1,3 +1,5 @@
 venv/
 *.pyc
 *.pdf
+.DS_Store
+ingots/files/*
