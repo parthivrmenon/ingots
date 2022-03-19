@@ -6,11 +6,14 @@
 <body class="left flex-container">
   <div class="check-in centered-text">
     <h1 class="header"> Check-In</h1>
-    <div class="file-input">
+    <div class="file-input centered centered-text">
       <form method=post enctype=multipart/form-data>
-      <input type="file" name="file" id="file" class="file">
-      <label for="file">Select a file</label>
-      <input type=submit value=Upload class="button color_primary">
+        <input type="file" name="file" id="file" class="file">
+        <input type=submit value=Upload class="button color_primary">
+
+
+      
+      <!-- <label for="file">Select a file</label> -->
       </form>
       <div class="centered notification">
         {% if message %}

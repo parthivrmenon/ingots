@@ -17,12 +17,20 @@
 }
 
 .file {
+  font-size: 20px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  text-decoration: none;
+
+
+
+}
+/* .file {
   opacity: 0;
   width: 0.0px;
   height: 0.0px;
-}
+} */
 
-.file-input label{
+/* .file-input label{
   transition-duration: 0.4s;
   color: goldenrod;
   border: solid 2px goldenrod;
@@ -32,7 +40,7 @@
   font-size: 20px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   width: 180px;
-}
+} */
 
 .button:hover,.file-input label:hover {
   background-color: goldenrod;
