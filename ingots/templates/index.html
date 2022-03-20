@@ -4,29 +4,31 @@
 </head>
 
 <body class="left flex-container">
+  
   <div class="check-in centered-text">
-    <h1 class="header"> Check-In</h1>
     <div class="file-input centered centered-text">
-      <form method=post enctype=multipart/form-data>
-        <input type="file" name="file" id="file" class="file">
-        <input type=submit value=Upload class="button color_primary">
-
-
-      
-      <!-- <label for="file">Select a file</label> -->
-      </form>
-      <div class="centered notification">
-        {% if message %}
-        {{ message }}
-        {% endif %}
+      <div class="file-input-header">
+        <h1 class="header"> Check-In</h1>
+      </div>
+      <div class="file-input-form">
+        <form method=post enctype=multipart/form-data>
+          <div class="form-inputs flex-container centered-text centered">
+            <div class="form-input"><input type="file" name="file" id="file" class="file"></div>
+            <div class="form-input"><input type=submit value=Upload id="submit" class="button color_primary"></div>
+            <div class="centered notification">
+              {% if message %}
+              {{ message }}
+              {% endif %}
+            </div>
+          </div>
+        </form>
       </div>
     </div>
   </div>
 
   <div class="check-out centered">
-    <div>
-    <h1 class="header centered-text color_primary"> Check-Out</h1>
-    <ol>
+      <h1 class="header centered-text color_primary"> Check-Out</h1>
+      <ol>
       {% for file in files %}
       <li>
         <a href="/uploads/{{file}}">{{file}}</a>

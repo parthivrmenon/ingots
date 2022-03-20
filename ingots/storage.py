@@ -9,7 +9,7 @@ from botocore.exceptions import ClientError
 
 
 class Storage(ABC):
-    
+
     @abstractmethod
     def store(self):
         pass 
@@ -54,8 +54,17 @@ class S3Storage(Storage):
     def store(self, file_name, file_object):
         file_path = os.path.join(self.upload_location, file_name)
         file_object.save(file_path)
-        response = self.s3_client.upload_file(file_path,self.bucket_name,file_name)
-        # TODO: add some logic to confirm upload, then delete temp file.
+        try:
+            self.s3_client.upload_file(file_path,self.bucket_name,file_name)
+        except Exception as err:
+            print(err)
+            self.delete_file(file_path)
+            return False
+            
+        self.delete_file(file_path)
+        return True
+
+    def delete_file(self, file_path):
         if os.path.exists(file_path):
             print(f"Removing temp file {file_path}")
             os.remove(file_path)
@@ -69,7 +78,6 @@ class S3Storage(Storage):
 
         except KeyError as e:
             print(e)
-        print(files)
 
         return files
 

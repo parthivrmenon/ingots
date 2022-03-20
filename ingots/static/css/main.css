@@ -1,26 +1,27 @@
 .flex-container {
   display: flex;
   flex-direction:column
+
+}
+
+.check-in {
+  background-color: whitesmoke;
+  border: 0.1rem solid gray;
 }
 
 .button{
-  color: goldenrod;  
   transition-duration: 0.4s;
-  border: solid 2px goldenrod;
-  background-color: white;
-  padding: 15px 32px;
-  text-align: center;
+  /* border: solid 2px goldenrod; */
   text-decoration: none;
   font-size: 20px;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  width: 180px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif; 
 }
 
 .file {
   font-size: 20px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   text-decoration: none;
-
+  /* color: goldenrod;  */
 
 
 }
@@ -41,23 +42,29 @@
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   width: 180px;
 } */
+.form-input {
+  color: rebeccapurple;
+  width: 50%;
+  margin: 5px auto;
+
+}
 
 .button:hover,.file-input label:hover {
-  background-color: goldenrod;
+  background-color: purple;
   color: white;
 }
 
 a {
   font-family: monospace;
-  color: goldenrod;  
+  color: purple;  
 }
 li {
   padding:0.5rem
 }
 .header {
-  color: goldenrod;
-  padding: 30px;
-  font-size: 30px;
+  color: peru;
+  padding: 10px;
+  font-size: 20px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
