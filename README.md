@@ -4,5 +4,5 @@
 
 *Ingots* is a personal library application to store e-books, pdfs and other documents.
 
-
-
+ 
+![Alt text](Glimpse.png?raw=true "Optional Title")
