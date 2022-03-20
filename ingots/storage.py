@@ -42,13 +42,13 @@ class LocalStorage(Storage):
 
 
 class S3Storage(Storage):
-    def __init__(self, upload_location):
+    def __init__(self, upload_location, aws_access_key, aws_secret_key, aws_bucket):
         self.s3_client = boto3.client(
             's3',
-            aws_access_key_id="AKIAW2AN3TBJVNA57H4I",
-            aws_secret_access_key="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"
+            aws_access_key_id=aws_access_key,
+            aws_secret_access_key=aws_secret_key
             )
-        self.bucket_name = "ingots"
+        self.bucket_name = aws_bucket
         self.upload_location = upload_location
 
     def store(self, file_name, file_object):
