@@ -14,16 +14,16 @@ app.config['AWS_ACCESS_KEY'] = os.environ['AWS_ACCESS_KEY']
 app.config['AWS_SECRET_KEY'] = os.environ['AWS_SECRET_KEY']
 app.config['AWS_BUCKET'] = os.environ['AWS_BUCKET']
 
-
-store = LocalStorage(app.config['UPLOAD_FOLDER'])
-store_s3 = S3Storage(
-    app.config['UPLOAD_FOLDER'],
-    app.config['AWS_ACCESS_KEY'],
-    app.config['AWS_SECRET_KEY'],
-    app.config['AWS_BUCKET'],
+storage_mgr = LocalStorage(app.config["UPLOAD_FOLDER"])
+# store = LocalStorage(app.config['UPLOAD_FOLDER'])
+# storage_mgr = S3Storage(
+#     app.config['UPLOAD_FOLDER'],
+#     app.config['AWS_ACCESS_KEY'],
+#     app.config['AWS_SECRET_KEY'],
+#     app.config['AWS_BUCKET'],
 
     
-    )
+#     )
 
 
 

@@ -1,6 +1,10 @@
+from cgi import FieldStorage
 import os
 from abc import ABC, abstractmethod
-from flask import send_from_directory, abort
+from xmlrpc.client import Boolean
+from flask import Response, send_from_directory, abort
+
+
 
 
 import logging
@@ -11,32 +15,34 @@ from botocore.exceptions import ClientError
 class Storage(ABC):
 
     @abstractmethod
-    def store(self):
+    def store(self) -> Boolean:
         pass 
 
     @abstractmethod
-    def retrieve(self):
+    def retrieve(self) -> Response:
         pass
 
     @abstractmethod
-    def list(self):
+    def list(self) -> list[str]:
         pass
 
 
 class LocalStorage(Storage):
-    def __init__(self, upload_location):
+    def __init__(self, upload_location:str):
         self.upload_location = upload_location
 
-    def store(self, file_name, file_object):
+    def store(self, file_name:str, file_object:any):
+        logging.debug(f"Uploading {file_name} to {self.upload_location}.")
         file_object.save(os.path.join(self.upload_location, file_name))
+        return True
 
-    def retrieve(self,file_name):
+    def retrieve(self,file_name) -> Response:
         try:
             return send_from_directory(self.upload_location,file_name, as_attachment=True)
         except FileNotFoundError:
             return abort(404)
 
-    def list(self):
+    def list(self) -> list[str]:
         files = os.listdir(self.upload_location)
         return files
 

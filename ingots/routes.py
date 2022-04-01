@@ -1,11 +1,11 @@
-from ingots import app,store_s3
+from ingots import app,storage_mgr
 from flask import render_template,request
 from werkzeug.utils import secure_filename
 
 @app.route('/',methods=['GET', 'POST'])
 def home():
     message = None
-    files = store_s3.list()
+    files = storage_mgr.list()
 
     if request.method == 'POST':
         if 'file' not in request.files:
@@ -18,9 +18,9 @@ def home():
 
             if file and file.filename:
                 safe_filename = secure_filename(file.filename)
-                if store_s3.store(safe_filename,file):
+                if storage_mgr.store(safe_filename,file):
                     message = f"File {safe_filename} uploaded."
-                    files = store_s3.list()
+                    files = storage_mgr.list()
                 else:
                     message = f"File {safe_filename} could not be uploaded. Please try again after some time."
 
@@ -29,5 +29,5 @@ def home():
 
 @app.route('/uploads/<name>', methods=['GET'])
 def download(name):
-    return store_s3.retrieve(name)
+    return storage_mgr.retrieve(name)
 
