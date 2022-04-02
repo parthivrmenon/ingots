@@ -1,13 +1,24 @@
 # CONFIGURATION
 import os
 from os import environ
+from flask_cors import CORS
 from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 from .storage import LocalStorage,S3Storage
 
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 UPLOAD_FOLDER=os.path.join(BASE_DIR, 'files')
     
 app = Flask(__name__)
+CORS(app)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = 'True'
+
+db = SQLAlchemy(app)
+migrate = Migrate(app, db)
+
+
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['SECRET_KEY'] = '1@3$5^7'
 app.config['AWS_ACCESS_KEY'] = os.environ['AWS_ACCESS_KEY'] 
@@ -26,6 +37,7 @@ storage_mgr = LocalStorage(app.config["UPLOAD_FOLDER"])
 #     )
 
 
-
-from ingots import routes
+# Import Routes,Models and create database tables.
+from ingots import routes,models
+db.create_all()
 

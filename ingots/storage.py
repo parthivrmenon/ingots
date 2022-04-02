@@ -26,6 +26,10 @@ class Storage(ABC):
     def list(self) -> list[str]:
         pass
 
+    @abstractmethod
+    def delete(self) ->Boolean:
+        pass
+
 
 class LocalStorage(Storage):
     def __init__(self, upload_location:str):
@@ -36,15 +40,24 @@ class LocalStorage(Storage):
         file_object.save(os.path.join(self.upload_location, file_name))
         return True
 
-    def retrieve(self,file_name) -> Response:
+    def retrieve(self,file_name):
         try:
             return send_from_directory(self.upload_location,file_name, as_attachment=True)
         except FileNotFoundError:
-            return abort(404)
+            print('Could not retrieve',file_name)
+            return None
 
     def list(self) -> list[str]:
         files = os.listdir(self.upload_location)
         return files
+
+    def delete(self,file_name):
+        file_path = os.path.join(self.upload_location,file_name)
+        if os.path.exists(file_path):
+            print(f"Removing temp file {file_path}")
+            os.remove(file_path)
+            return True
+
 
 
 class S3Storage(Storage):
